@@ -222,8 +222,8 @@
                                     <div>
                                         <div class="flex justify-between text-sm mb-2">
                                             <span class="text-ink">{{ $data['label'] }}</span>
-                                            <span class="text-ink-muted tabular-nums">
-                                                {{ $data['count'] }}&ensp;·&ensp;{{ $data['percentage'] }}%
+                                            <span class="text-ink font-semibold tabular-nums">
+                                                {{ $data['count'] }}
                                             </span>
                                         </div>
                                         <div class="h-0.5 bg-rule-light overflow-hidden">

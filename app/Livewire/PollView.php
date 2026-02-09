@@ -215,7 +215,9 @@ class PollView extends Component
             ];
         }
 
-        usort($optionResults, fn($a, $b) => $b['count'] <=> $a['count']);
+        if ($this->poll->type !== 'date') {
+            usort($optionResults, fn($a, $b) => $b['count'] <=> $a['count']);
+        }
 
         $voters = [];
         foreach ($voterNames as $name) {
@@ -256,7 +258,9 @@ class PollView extends Component
             ];
         }
 
-        usort($optionResults, fn($a, $b) => $b['score'] <=> $a['score']);
+        if ($this->poll->type !== 'date') {
+            usort($optionResults, fn($a, $b) => $b['score'] <=> $a['score']);
+        }
 
         $voters = [];
         foreach ($voterNames as $name) {

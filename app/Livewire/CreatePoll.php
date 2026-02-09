@@ -49,7 +49,12 @@ class CreatePoll extends Component
             'password' => $this->password ? Hash::make($this->password) : null,
         ]);
 
-        foreach ($this->options as $i => $label) {
+        $options = $this->options;
+        if ($this->type === 'date') {
+            sort($options);
+        }
+
+        foreach ($options as $i => $label) {
             $poll->options()->create([
                 'label' => $this->type === 'date' ? \Carbon\Carbon::parse($label)->translatedFormat('l, j. F Y') : $label,
                 'sort_order' => $i,
