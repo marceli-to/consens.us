@@ -15,7 +15,10 @@
       "Bash(git rm:*)",
       "Bash(ssh:*)",
       "Bash(ssh-add:*)",
-      "Bash(npx skills add anthropics/skills --skill skill-creator --agent claude-code --yes)"
+      "Bash(npx skills add anthropics/skills --skill skill-creator --agent claude-code --yes)",
+      "Bash(sqlite3:*)",
+      "Bash(curl:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }

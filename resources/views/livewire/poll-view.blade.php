@@ -32,17 +32,8 @@
         @if(!$poll->is_closed)
             @if(!$hasVoted)
                 <section class="pb-12 border-b border-rule">
-                    <div class="flex items-baseline justify-between mb-8">
+                    <div class="mb-8">
                         <h3 class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted">Abstimmen</h3>
-                        <span class="text-[10px] tracking-[0.2em] uppercase text-ink-faint">
-                            @if($poll->isSingleChoice())
-                                Einzelauswahl
-                            @elseif($poll->isYesNoMaybe())
-                                Ja · Nein · Vielleicht
-                            @else
-                                Mehrfachauswahl möglich
-                            @endif
-                        </span>
                     </div>
 
                     <form wire:submit="submitVote" class="space-y-8">
@@ -55,7 +46,15 @@
                         </div>
 
                         <div>
-                            <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Optionen</label>
+                            <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Optionen
+                                @if($poll->isSingleChoice())
+                                    <span class="text-ink-faint">(Einzelauswahl)</span>
+                                @elseif($poll->isYesNoMaybe())
+                                    <span class="text-ink-faint">(Ja · Nein · Vielleicht)</span>
+                                @else
+                                    <span class="text-ink-faint">(Mehrfachauswahl)</span>
+                                @endif
+                            </label>
 
                             @if($poll->isYesNoMaybe())
                                 {{-- Yes/No/Maybe voting --}}
@@ -146,118 +145,67 @@
             <div class="h-px bg-ink mb-10"></div>
 
             @if($results['totalVoters'] > 0)
-                <div class="space-y-12">
-                    @if($poll->isYesNoMaybe())
-                        {{-- YNM Results: stacked bars --}}
-                        <div class="space-y-5">
-                            @foreach($results['options'] as $data)
-                                <div>
-                                    <div class="flex justify-between text-sm mb-2">
-                                        <span class="text-ink">{{ $data['label'] }}</span>
-                                        <span class="text-ink-muted tabular-nums text-xs">
-                                            <span class="text-emerald-600">{{ $data['yes'] }}×Ja</span>
-                                            &ensp;
-                                            <span class="text-amber-500">{{ $data['maybe'] }}×Vielleicht</span>
-                                            &ensp;
-                                            <span class="text-red-500">{{ $data['no'] }}×Nein</span>
-                                        </span>
-                                    </div>
-                                    <div class="h-1.5 bg-rule-light overflow-hidden flex">
-                                        @if($data['yesPercent'] > 0)
-                                            <div class="h-full bg-emerald-600 transition-all duration-700" style="width: {{ $data['yesPercent'] }}%"></div>
-                                        @endif
-                                        @if($data['maybePercent'] > 0)
-                                            <div class="h-full bg-amber-400 transition-all duration-700" style="width: {{ $data['maybePercent'] }}%"></div>
-                                        @endif
-                                        @if($data['noPercent'] > 0)
-                                            <div class="h-full bg-red-400 transition-all duration-700" style="width: {{ $data['noPercent'] }}%"></div>
-                                        @endif
-                                    </div>
+                @if($poll->isYesNoMaybe())
+                    {{-- YNM Results: bar + voter names per option --}}
+                    <div class="space-y-8">
+                        @foreach($results['options'] as $data)
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-ink">{{ $data['label'] }}</span>
+                                    <span class="text-ink-muted tabular-nums text-xs">
+                                        <span class="text-emerald-600 font-semibold">{{ $data['yes'] }}</span>
+                                        &ensp;
+                                        <span class="text-amber-500 font-semibold">{{ $data['maybe'] }}</span>
+                                        &ensp;
+                                        <span class="text-red-500 font-semibold">{{ $data['no'] }}</span>
+                                    </span>
                                 </div>
-                            @endforeach
-                        </div>
-
-                        {{-- YNM Voter Table (Doodle-style grid) --}}
-                        <div>
-                            <h3 class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-6">Alle Stimmen</h3>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-sm">
-                                    <thead>
-                                        <tr class="border-b border-ink">
-                                            <th class="text-left py-3 pr-4 text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted">Name</th>
-                                            @foreach($poll->options as $option)
-                                                <th class="py-3 px-2 text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted text-center">{{ $option->label }}</th>
-                                            @endforeach
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($results['voters'] as $voter)
-                                            <tr class="border-b border-rule-light">
-                                                <td class="py-3 pr-4 text-ink font-medium">{{ $voter['name'] }}</td>
-                                                @foreach($poll->options as $option)
-                                                    @php $val = $voter['options'][$option->id] ?? null; @endphp
-                                                    <td class="py-3 px-2 text-center">
-                                                        @if($val === 'yes')
-                                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 text-xs">✓</span>
-                                                        @elseif($val === 'maybe')
-                                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-700 text-xs">?</span>
-                                                        @elseif($val === 'no')
-                                                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-600 text-xs">✕</span>
-                                                        @else
-                                                            <span class="text-ink-faint">—</span>
-                                                        @endif
-                                                    </td>
-                                                @endforeach
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                <div class="h-1.5 bg-rule-light overflow-hidden flex mb-2">
+                                    @if($data['yesPercent'] > 0)
+                                        <div class="h-full bg-emerald-600 transition-all duration-700" style="width: {{ $data['yesPercent'] }}%"></div>
+                                    @endif
+                                    @if($data['maybePercent'] > 0)
+                                        <div class="h-full bg-amber-400 transition-all duration-700" style="width: {{ $data['maybePercent'] }}%"></div>
+                                    @endif
+                                    @if($data['noPercent'] > 0)
+                                        <div class="h-full bg-red-400 transition-all duration-700" style="width: {{ $data['noPercent'] }}%"></div>
+                                    @endif
+                                </div>
+                                <div class="text-xs text-ink-muted space-y-0.5">
+                                    @if(count($data['yesVoters']) > 0)
+                                        <p><span class="text-emerald-600">Ja:</span> {{ implode(', ', $data['yesVoters']) }}</p>
+                                    @endif
+                                    @if(count($data['maybeVoters']) > 0)
+                                        <p><span class="text-amber-500">Vielleicht:</span> {{ implode(', ', $data['maybeVoters']) }}</p>
+                                    @endif
+                                    @if(count($data['noVoters']) > 0)
+                                        <p><span class="text-red-500">Nein:</span> {{ implode(', ', $data['noVoters']) }}</p>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                    @else
-                        {{-- Checkbox / Radio Results --}}
-                        <div>
-                            <div class="space-y-5">
-                                @foreach($results['options'] as $data)
-                                    <div>
-                                        <div class="flex justify-between text-sm mb-2">
-                                            <span class="text-ink">{{ $data['label'] }}</span>
-                                            <span class="text-ink font-semibold tabular-nums">
-                                                {{ $data['count'] }}
-                                            </span>
-                                        </div>
-                                        <div class="h-0.5 bg-rule-light overflow-hidden">
-                                            <div class="h-full bg-ink transition-all duration-700" style="width: {{ $data['percentage'] }}%"></div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                        @endforeach
+                    </div>
+                @else
+                    {{-- Checkbox / Radio Results: bar + voter names per option --}}
+                    <div class="space-y-8">
+                        @foreach($results['options'] as $data)
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-ink">{{ $data['label'] }}</span>
+                                    <span class="text-ink font-semibold tabular-nums">
+                                        {{ $data['count'] }}
+                                    </span>
+                                </div>
+                                <div class="h-0.5 bg-rule-light overflow-hidden mb-2">
+                                    <div class="h-full bg-ink transition-all duration-700" style="width: {{ $data['percentage'] }}%"></div>
+                                </div>
+                                @if(count($data['voterNames']) > 0)
+                                    <p class="text-xs text-ink-muted">{{ implode(', ', $data['voterNames']) }}</p>
+                                @endif
                             </div>
-                        </div>
-
-                        {{-- Voter Table --}}
-                        <div>
-                            <h3 class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-6">Alle Stimmen</h3>
-                            <table class="w-full text-sm">
-                                <thead>
-                                    <tr class="border-b border-ink">
-                                        <th class="text-left py-3 pr-4 text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted">Name</th>
-                                        <th class="text-left py-3 text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted">Gewählt</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($results['voters'] as $voter)
-                                        <tr class="border-b border-rule-light">
-                                            <td class="py-3 pr-4 text-ink font-medium">{{ $voter['name'] }}</td>
-                                            <td class="py-3 text-ink-muted">
-                                                {{ collect($voter['options'])->map(fn($id) => $poll->options->firstWhere('id', $id)?->label)->filter()->join(', ') }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif
-                </div>
+                        @endforeach
+                    </div>
+                @endif
             @else
                 <div class="text-center py-16">
                     <p class="font-serif text-lg italic text-ink-muted">Noch keine Stimmen abgegeben.</p>

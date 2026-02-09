@@ -206,12 +206,14 @@ class PollView extends Component
 
         $optionResults = [];
         foreach ($this->poll->options as $option) {
-            $count = $votes->where('poll_option_id', $option->id)->count();
+            $optionVotes = $votes->where('poll_option_id', $option->id);
+            $count = $optionVotes->count();
             $optionResults[] = [
                 'id' => $option->id,
                 'label' => $option->label,
                 'count' => $count,
                 'percentage' => $totalVoters > 0 ? round(($count / $totalVoters) * 100) : 0,
+                'voterNames' => $optionVotes->pluck('voter_name')->toArray(),
             ];
         }
 
@@ -219,19 +221,9 @@ class PollView extends Component
             usort($optionResults, fn($a, $b) => $b['count'] <=> $a['count']);
         }
 
-        $voters = [];
-        foreach ($voterNames as $name) {
-            $voterVotes = $votes->where('voter_name', $name)->pluck('poll_option_id')->toArray();
-            $voters[] = [
-                'name' => $name,
-                'options' => $voterVotes,
-            ];
-        }
-
         return [
             'totalVoters' => $totalVoters,
             'options' => $optionResults,
-            'voters' => $voters,
         ];
     }
 
@@ -255,6 +247,9 @@ class PollView extends Component
                 'yesPercent' => $totalVoters > 0 ? round(($yesCount / $totalVoters) * 100) : 0,
                 'noPercent' => $totalVoters > 0 ? round(($noCount / $totalVoters) * 100) : 0,
                 'maybePercent' => $totalVoters > 0 ? round(($maybeCount / $totalVoters) * 100) : 0,
+                'yesVoters' => $optionVotes->where('value', 'yes')->pluck('voter_name')->toArray(),
+                'maybeVoters' => $optionVotes->where('value', 'maybe')->pluck('voter_name')->toArray(),
+                'noVoters' => $optionVotes->where('value', 'no')->pluck('voter_name')->toArray(),
             ];
         }
 
@@ -262,23 +257,9 @@ class PollView extends Component
             usort($optionResults, fn($a, $b) => $b['score'] <=> $a['score']);
         }
 
-        $voters = [];
-        foreach ($voterNames as $name) {
-            $voterVotes = $votes->where('voter_name', $name);
-            $optionMap = [];
-            foreach ($voterVotes as $vote) {
-                $optionMap[$vote->poll_option_id] = $vote->value;
-            }
-            $voters[] = [
-                'name' => $name,
-                'options' => $optionMap,
-            ];
-        }
-
         return [
             'totalVoters' => $totalVoters,
             'options' => $optionResults,
-            'voters' => $voters,
         ];
     }
 
