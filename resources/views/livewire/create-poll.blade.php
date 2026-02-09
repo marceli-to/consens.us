@@ -72,8 +72,24 @@
                     @foreach($options as $i => $option)
                         <div class="flex gap-2">
                             @if($type === 'date')
-                                <input type="date" wire:model="options.{{ $i }}"
-                                    class="flex-1 px-4 py-3 text-sm border border-rule bg-cream text-ink focus:outline-none focus:border-ink transition-colors">
+                                <div wire:ignore class="flex-1"
+                                    x-data
+                                    x-init="
+                                        flatpickr($refs.input_{{ $i }}, {
+                                            dateFormat: 'Y-m-d',
+                                            altInput: true,
+                                            altFormat: 'j. F Y',
+                                            defaultDate: $wire.options[{{ $i }}] || null,
+                                            onChange: function(selectedDates, dateStr) {
+                                                $wire.set('options.{{ $i }}', dateStr);
+                                            }
+                                        })
+                                    ">
+                                    <input x-ref="input_{{ $i }}" type="text"
+                                        class="w-full px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors cursor-pointer"
+                                        placeholder="Datum wählen"
+                                        readonly>
+                                </div>
                             @else
                                 <input type="text" wire:model="options.{{ $i }}"
                                     class="flex-1 px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
