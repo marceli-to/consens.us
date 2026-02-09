@@ -12,6 +12,7 @@ class PollEdit extends Component
     public string $description = '';
     public array $options = [];
     public string $newOption = '';
+    public bool $allowComments = true;
     public bool $showDeleteConfirm = false;
     public string $publicUrl = '';
     public string $editUrl = '';
@@ -22,6 +23,7 @@ class PollEdit extends Component
         $this->title = $this->poll->title;
         $this->description = $this->poll->description ?? '';
         $this->options = $this->poll->options->map(fn($o) => ['id' => $o->id, 'label' => $o->label])->toArray();
+        $this->allowComments = $this->poll->allow_comments;
         $this->publicUrl = url("/p/{$this->poll->slug}");
         $this->editUrl = url("/p/{$this->poll->slug}/edit/{$this->poll->edit_token}");
     }
@@ -57,6 +59,13 @@ class PollEdit extends Component
         $this->poll->options()->where('id', $optionId)->delete();
         $this->poll->votes()->where('poll_option_id', $optionId)->delete();
         $this->options = array_values(array_filter($this->options, fn($o) => $o['id'] !== $optionId));
+    }
+
+    public function toggleComments()
+    {
+        $this->allowComments = !$this->allowComments;
+        $this->poll->update(['allow_comments' => $this->allowComments]);
+        $this->poll->refresh();
     }
 
     public function toggleClose()

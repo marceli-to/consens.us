@@ -11,6 +11,7 @@ class CreatePoll extends Component
     public string $title = '';
     public string $description = '';
     public string $type = 'freetext';
+    public string $votingMode = 'checkbox';
     public array $options = ['', ''];
     public string $password = '';
 
@@ -32,6 +33,7 @@ class CreatePoll extends Component
         $this->validate([
             'title' => 'required|min:2|max:255',
             'type' => 'required|in:freetext,date',
+            'votingMode' => 'required|in:checkbox,radio,yesnomaybe',
             'options' => 'required|array|min:2',
             'options.*' => 'required|string|min:1',
         ], [
@@ -43,6 +45,7 @@ class CreatePoll extends Component
             'title' => $this->title,
             'description' => $this->description ?: null,
             'type' => $this->type,
+            'voting_mode' => $this->votingMode,
             'password' => $this->password ? Hash::make($this->password) : null,
         ]);
 

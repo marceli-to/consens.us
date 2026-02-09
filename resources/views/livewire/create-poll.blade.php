@@ -1,10 +1,8 @@
 <div>
     <section class="pb-12">
-        <div class="flex items-baseline justify-between mb-2">
-            <h2 class="font-serif text-3xl font-bold tracking-tight">Neuer Poll</h2>
-            <span class="text-[10px] tracking-[0.2em] uppercase text-ink-faint">Erstellen</span>
+        <div class="mb-8">
+            <h2 class="font-serif text-3xl font-bold tracking-tight">Neue Umfrage</h2>
         </div>
-        <div class="h-px bg-ink mb-8"></div>
 
         <form wire:submit="submit" class="space-y-10">
             {{-- Title --}}
@@ -39,6 +37,34 @@
                 </div>
             </div>
 
+            {{-- Voting Mode --}}
+            <div>
+                <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Abstimmungsmodus</label>
+                <div class="flex flex-wrap gap-2">
+                    <label class="vote-option">
+                        <input type="radio" wire:model.live="votingMode" value="checkbox" class="sr-only">
+                        <div class="option-card {{ $votingMode === 'checkbox' ? '!border-ink !bg-ink !text-cream' : '' }}">Mehrfachauswahl</div>
+                    </label>
+                    <label class="vote-option">
+                        <input type="radio" wire:model.live="votingMode" value="radio" class="sr-only">
+                        <div class="option-card {{ $votingMode === 'radio' ? '!border-ink !bg-ink !text-cream' : '' }}">Einzelauswahl</div>
+                    </label>
+                    <label class="vote-option">
+                        <input type="radio" wire:model.live="votingMode" value="yesnomaybe" class="sr-only">
+                        <div class="option-card {{ $votingMode === 'yesnomaybe' ? '!border-ink !bg-ink !text-cream' : '' }}">Ja · Nein · Vielleicht</div>
+                    </label>
+                </div>
+                <p class="mt-2 text-[10px] text-ink-faint">
+                    @if($votingMode === 'checkbox')
+                        Teilnehmer können mehrere Optionen wählen.
+                    @elseif($votingMode === 'radio')
+                        Teilnehmer können genau eine Option wählen.
+                    @else
+                        Teilnehmer bewerten jede Option mit Ja, Nein oder Vielleicht.
+                    @endif
+                </p>
+            </div>
+
             {{-- Options --}}
             <div>
                 <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Optionen</label>
@@ -62,8 +88,8 @@
                     @error('options.*') <p class="text-sm text-accent">{{ $message }}</p> @enderror
                 </div>
                 <button type="button" wire:click="addOption"
-                    class="mt-3 text-[10px] uppercase tracking-[0.2em] text-ink-faint hover:text-ink border-b border-ink-faint hover:border-ink pb-0.5 transition-colors cursor-pointer">
-                    + Option hinzufügen
+                    class="group mt-3 text-[10px] uppercase tracking-[0.2em] text-ink-faint hover:text-ink transition-colors cursor-pointer">
+                    + <span class="border-b border-transparent group-hover:border-ink pb-0.5 transition-colors">Option hinzufügen</span>
                 </button>
             </div>
 
@@ -79,7 +105,7 @@
             {{-- Submit --}}
             <div>
                 <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium bg-ink text-cream hover:bg-ink-light transition-colors cursor-pointer tracking-wide uppercase">
-                    Poll erstellen
+                    Umfrage erstellen
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>

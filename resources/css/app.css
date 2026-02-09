@@ -23,6 +23,37 @@
     --color-accent: #c0392b;
 }
 
+/* Beta corner ribbon */
+.beta-ribbon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    pointer-events: none;
+}
+
+.beta-ribbon::after {
+    content: 'Beta';
+    position: absolute;
+    top: 18px;
+    left: -22px;
+    width: 100px;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #faf8f4;
+    background: #c0392b;
+    transform: rotate(-45deg);
+    padding: 3px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
 /* Vote option checkboxes */
 .vote-option input[type="checkbox"] {
     @apply sr-only;
@@ -42,4 +73,88 @@
 
 .vote-option input[type="checkbox"]:focus-visible + .option-card {
     @apply ring-2 ring-ink ring-offset-2 ring-offset-cream;
+}
+
+/* Vote option rows (vertical list for poll voting) */
+.vote-option-row {
+    @apply flex items-center gap-3 px-4 py-3 border border-rule bg-cream text-ink cursor-pointer transition-all duration-200;
+}
+
+.vote-option-row:hover {
+    @apply border-ink;
+}
+
+.vote-option-row:has(input:checked) {
+    @apply border-ink bg-ink text-cream;
+}
+
+.vote-option-row input[type="checkbox"],
+.vote-option-row input[type="radio"] {
+    @apply sr-only;
+}
+
+.vote-option-label {
+    @apply text-sm;
+}
+
+/* Vote option radio buttons (single choice + create form) */
+.vote-option input[type="radio"] {
+    @apply sr-only;
+}
+
+.vote-option input[type="radio"]:checked + .option-card {
+    @apply border-ink bg-ink text-cream;
+}
+
+.vote-option input[type="radio"]:focus-visible + .option-card {
+    @apply ring-2 ring-ink ring-offset-2 ring-offset-cream;
+}
+
+/* Yes/No/Maybe voting */
+.ynm-option {
+    @apply cursor-pointer;
+}
+
+.ynm-option input[type="radio"] {
+    @apply sr-only;
+}
+
+.ynm-card {
+    @apply px-3 py-1.5 text-xs font-sans border cursor-pointer transition-all duration-200;
+}
+
+.ynm-yes {
+    @apply border-rule text-ink-muted;
+}
+
+.ynm-yes:hover, .ynm-yes.ynm-active {
+    @apply border-emerald-600 bg-emerald-600 text-white;
+}
+
+.ynm-maybe {
+    @apply border-rule text-ink-muted;
+}
+
+.ynm-maybe:hover, .ynm-maybe.ynm-active {
+    @apply border-amber-500 bg-amber-500 text-white;
+}
+
+.ynm-no {
+    @apply border-rule text-ink-muted;
+}
+
+.ynm-no:hover, .ynm-no.ynm-active {
+    @apply border-red-500 bg-red-500 text-white;
+}
+
+.ynm-option input[type="radio"]:checked + .ynm-yes {
+    @apply border-emerald-600 bg-emerald-600 text-white;
+}
+
+.ynm-option input[type="radio"]:checked + .ynm-maybe {
+    @apply border-amber-500 bg-amber-500 text-white;
+}
+
+.ynm-option input[type="radio"]:checked + .ynm-no {
+    @apply border-red-500 bg-red-500 text-white;
 }

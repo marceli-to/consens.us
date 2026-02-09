@@ -1,21 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1b4b"/>
-      <stop offset="50%" style="stop-color:#7c3aed"/>
-      <stop offset="100%" style="stop-color:#ff6b6b"/>
-    </linearGradient>
-    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#ffd93d"/>
-      <stop offset="100%" style="stop-color:#ff6b6b"/>
-    </linearGradient>
-  </defs>
-  <!-- Background -->
-  <rect width="32" height="32" rx="6" fill="url(#bgGrad)"/>
-  <!-- Mountain silhouette -->
-  <path d="M0 26 L8 18 L14 22 L22 14 L32 22 L32 32 L0 32 Z" fill="#0a0b1a" opacity="0.6"/>
-  <!-- Sun -->
-  <circle cx="22" cy="10" r="5" fill="url(#sunGrad)"/>
-  <!-- H Letter -->
-  <text x="16" y="23" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="white" text-anchor="middle">H</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512"><svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M267.06 456C233.143 456 203.404 447.897 177.843 431.691C152.283 414.993 132.129 391.912 117.382 362.446C103.127 332.98 96 298.603 96 259.315C96 219.045 103.619 183.686 118.857 153.238C134.095 122.298 155.232 98.48 182.267 81.7827C209.794 64.5942 241.253 56 276.645 56C301.714 56 324.08 59.9288 343.742 67.7864C363.896 75.6439 379.871 86.2026 391.668 99.4622C403.465 112.722 409.364 127.946 409.364 145.134C409.364 159.376 404.94 171.163 396.092 180.494C387.736 189.333 376.676 193.753 362.912 193.753C352.098 193.753 343.25 190.807 336.369 184.913C329.487 178.529 326.046 170.672 326.046 161.341C326.046 152.01 328.258 143.661 332.682 136.295C337.106 128.928 341.53 122.298 345.954 116.405C350.378 110.021 352.59 103.391 352.59 96.5156C352.59 87.1848 346.691 79.5727 334.894 73.6795C323.097 67.7864 308.35 64.8398 290.654 64.8398C253.296 64.8398 224.295 81.046 203.65 113.459C183.005 145.871 172.682 191.543 172.682 250.475C172.682 308.916 183.25 354.343 204.387 386.755C225.524 419.168 255.508 435.374 294.341 435.374C319.41 435.374 341.776 428.007 361.438 413.274C381.591 398.541 397.321 377.179 408.627 349.186L416 352.869C404.694 385.282 385.77 410.573 359.226 428.744C333.174 446.915 302.452 456 267.06 456Z" fill="black"></path>
+</svg></svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: invert(100%); } }
+</style></svg>

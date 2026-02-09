@@ -1,10 +1,9 @@
 <div>
     <section class="pb-12">
-        <div class="flex items-baseline justify-between mb-2">
-            <h2 class="font-serif text-3xl font-bold tracking-tight">Poll verwalten</h2>
+        <div class="flex items-baseline justify-between mb-8">
+            <h2 class="font-serif text-3xl font-bold tracking-tight">Umfrage verwalten</h2>
             <span class="text-[10px] tracking-[0.2em] uppercase text-ink-faint">Admin</span>
         </div>
-        <div class="h-px bg-ink mb-8"></div>
 
         {{-- URLs --}}
         <div class="space-y-4 mb-12">
@@ -50,6 +49,21 @@
             </button>
         </div>
 
+        {{-- Voting Mode (read-only) --}}
+        <div class="mb-12 pb-12 border-b border-rule">
+            <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Abstimmungsmodus</label>
+            <div class="px-4 py-3 text-sm border border-rule bg-cream-dark text-ink-muted">
+                @if($poll->voting_mode === 'checkbox')
+                    Mehrfachauswahl
+                @elseif($poll->voting_mode === 'radio')
+                    Einzelauswahl
+                @elseif($poll->voting_mode === 'yesnomaybe')
+                    Ja · Nein · Vielleicht
+                @endif
+            </div>
+            <p class="mt-1 text-[10px] text-ink-faint">Der Abstimmungsmodus kann nach Erstellung nicht geändert werden.</p>
+        </div>
+
         {{-- Options --}}
         <div class="mb-12 pb-12 border-b border-rule">
             <h3 class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-4">Optionen</h3>
@@ -77,15 +91,20 @@
 
         {{-- Actions --}}
         <div class="space-y-4">
+            <button wire:click="toggleComments"
+                class="px-6 py-3 text-sm font-medium border border-ink text-ink hover:bg-ink hover:text-cream transition-colors cursor-pointer tracking-wide uppercase">
+                {{ $allowComments ? 'Kommentare deaktivieren' : 'Kommentare aktivieren' }}
+            </button>
+
             <button wire:click="toggleClose"
                 class="px-6 py-3 text-sm font-medium border border-ink text-ink hover:bg-ink hover:text-cream transition-colors cursor-pointer tracking-wide uppercase">
-                {{ $poll->is_closed ? 'Poll wieder öffnen' : 'Poll schliessen' }}
+                {{ $poll->is_closed ? 'Umfrage wieder öffnen' : 'Umfrage schliessen' }}
             </button>
 
             @if(!$showDeleteConfirm)
                 <button wire:click="$set('showDeleteConfirm', true)"
                     class="block text-[10px] uppercase tracking-[0.2em] text-ink-faint hover:text-accent transition-colors cursor-pointer mt-6">
-                    Poll löschen
+                    Umfrage löschen
                 </button>
             @else
                 <div class="mt-6 p-4 border border-accent">
