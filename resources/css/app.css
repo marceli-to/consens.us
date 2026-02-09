@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
+
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -6,334 +9,37 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
-    --font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
-    /* Sunset Expedition Color Palette */
-    --color-midnight-950: #0a0b1a;
-    --color-midnight-900: #12132d;
-    --color-midnight-800: #1a1b4b;
-    --color-midnight-700: #252766;
-    --color-midnight-600: #2f3280;
-
-    --color-coral-400: #ff8585;
-    --color-coral-500: #ff6b6b;
-    --color-coral-600: #e85555;
-
-    --color-amber-300: #ffe066;
-    --color-amber-400: #ffd93d;
-    --color-amber-500: #f5c518;
-
-    --color-gold-400: #fbbf24;
-    --color-gold-500: #f59e0b;
-
-    --color-violet-400: #a78bfa;
-    --color-violet-500: #8b5cf6;
-    --color-violet-600: #7c3aed;
-
-    --color-slate-200: #e2e8f0;
-    --color-slate-300: #cbd5e1;
-    --color-slate-400: #94a3b8;
-    --color-slate-500: #64748b;
+    --color-cream: #faf8f4;
+    --color-cream-dark: #f0ece4;
+    --color-ink: #1a1a1a;
+    --color-ink-light: #3d3d3d;
+    --color-ink-muted: #6b6b6b;
+    --color-ink-faint: #a3a3a3;
+    --color-rule: #d4cfc6;
+    --color-rule-light: #e8e4db;
+    --color-accent: #c0392b;
 }
 
-/* Custom animations */
-@keyframes fade-in-up {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes pulse-glow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 40px rgba(255, 107, 107, 0.5);
-    }
-}
-
-@keyframes gradient-shift {
-    0%, 100% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes sun-rays {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-.animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out forwards;
-    opacity: 0;
-}
-
-.animate-fade-in {
-    animation: fade-in 0.8s ease-out forwards;
-    opacity: 0;
-}
-
-.animate-float {
-    animation: float 6s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
-}
-
-.animate-sun-rays {
-    animation: sun-rays 60s linear infinite;
-}
-
-/* Staggered animation delays */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
-
-/* Glassmorphic card styles */
-.glass-card {
-    background: rgba(26, 27, 75, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.glass-card-light {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-/* Gradient text */
-.gradient-text {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #ff8585 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Sunset gradient background */
-.sunset-gradient {
-    background: linear-gradient(
-        180deg,
-        #0a0b1a 0%,
-        #12132d 20%,
-        #1a1b4b 40%,
-        #2f3280 60%,
-        #7c3aed 75%,
-        #e85555 88%,
-        #ffd93d 100%
-    );
-}
-
-/* Progress bar gradient */
-.progress-gradient {
-    background: linear-gradient(90deg, #ff6b6b 0%, #ffd93d 100%);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(26, 27, 75, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 107, 107, 0.5);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 107, 107, 0.7);
-}
-
-/* Focus styles */
-.focus-ring:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.4);
-}
-
-/* Custom checkbox styles for voting */
-.vote-option {
-    position: relative;
-    cursor: pointer;
-}
-
+/* Vote option checkboxes */
 .vote-option input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
+    @apply sr-only;
 }
 
 .vote-option .option-card {
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-    color: #cbd5e1;
-    font-weight: 500;
+    @apply px-4 py-2 text-sm font-sans border border-rule bg-cream text-ink-muted cursor-pointer transition-all duration-200;
 }
 
-.vote-option:hover .option-card {
-    border-color: rgba(255, 107, 107, 0.4);
-    background: rgba(255, 107, 107, 0.1);
+.vote-option .option-card:hover {
+    @apply border-ink text-ink;
 }
 
 .vote-option input[type="checkbox"]:checked + .option-card {
-    border-color: #ff6b6b;
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.2) 0%, rgba(255, 217, 61, 0.15) 100%);
-    color: #fff;
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+    @apply border-ink bg-ink text-cream;
 }
 
-.vote-option input[type="checkbox"]:focus + .option-card {
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.3);
-}
-
-/* Sun decoration */
-.sun-decoration {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,217,61,0.4) 0%, rgba(255,107,107,0.2) 40%, transparent 70%);
-    filter: blur(40px);
-}
-
-/* Mountain silhouette */
-.mountain-silhouette {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(180deg, transparent 0%, rgba(10,11,26,0.8) 100%);
-}
-
-/* Table styles */
-.expedition-table {
-    width: 100%;
-}
-
-.expedition-table thead tr {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.expedition-table th {
-    text-align: left;
-    padding: 0.75rem 1rem;
-    font-weight: 600;
-    color: #94a3b8;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.expedition-table tbody tr {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: background 0.2s ease;
-}
-
-.expedition-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.expedition-table td {
-    padding: 0.875rem 1rem;
-    color: #e2e8f0;
-    font-size: 0.875rem;
-}
-
-/* Button styles */
-.btn-primary {
-    background: linear-gradient(135deg, #ff6b6b 0%, #e85555 100%);
-    color: white;
-    font-weight: 600;
-    padding: 0.875rem 2rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(255, 107, 107, 0.4);
-}
-
-.btn-primary:active {
-    transform: translateY(0);
-}
-
-/* Input styles */
-.expedition-input {
-    width: 100%;
-    padding: 0.875rem 1.25rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: #fff;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.expedition-input::placeholder {
-    color: #64748b;
-}
-
-.expedition-input:focus {
-    outline: none;
-    border-color: #ff6b6b;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
-}
-
-/* Results progress bar */
-.result-bar {
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.result-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #ff6b6b 0%, #ffd93d 100%);
-    border-radius: 4px;
-    transition: width 0.6s ease-out;
+.vote-option input[type="checkbox"]:focus-visible + .option-card {
+    @apply ring-2 ring-ink ring-offset-2 ring-offset-cream;
 }

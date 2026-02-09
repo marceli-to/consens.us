@@ -1,3 +1,3 @@
 <x-layouts.app>
-    <livewire:doodle-vote />
+    <livewire:create-poll />
 </x-layouts.app>

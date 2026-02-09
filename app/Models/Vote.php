@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
-    protected $fillable = [
-        'name',
-        'trip_types',
-        'periods',
-    ];
+    protected $fillable = ['poll_id', 'poll_option_id', 'voter_name'];
 
-    protected $casts = [
-        'trip_types' => 'array',
-        'periods' => 'array',
-    ];
+    public function poll()
+    {
+        return $this->belongsTo(Poll::class);
+    }
+
+    public function option()
+    {
+        return $this->belongsTo(PollOption::class, 'poll_option_id');
+    }
 }
