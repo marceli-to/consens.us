@@ -136,13 +136,12 @@
 
         {{-- Results --}}
         <section class="pt-12">
-            <div class="flex items-baseline justify-between mb-2">
+            <div class="flex items-baseline justify-between pb-4 mb-10 border-b border-ink">
                 <h2 class="font-serif text-3xl font-bold tracking-tight">Ergebnisse</h2>
                 <span class="text-[10px] tracking-[0.2em] uppercase text-ink-faint tabular-nums">
                     {{ $results['totalVoters'] }} {{ $results['totalVoters'] === 1 ? 'Stimme' : 'Stimmen' }}
                 </span>
             </div>
-            <div class="h-px bg-ink mb-10"></div>
 
             @if($results['totalVoters'] > 0)
                 @if($poll->isYesNoMaybe())
@@ -217,13 +216,12 @@
         {{-- Comments --}}
         @if($poll->allow_comments)
             <section class="pt-12">
-                <div class="flex items-baseline justify-between mb-2">
+                <div class="flex items-baseline justify-between pb-4 mb-10 border-b border-ink">
                     <h2 class="font-serif text-3xl font-bold tracking-tight">Kommentare</h2>
                     <span class="text-[10px] tracking-[0.2em] uppercase text-ink-faint tabular-nums">
                         {{ $poll->comments->count() }}
                     </span>
                 </div>
-                <div class="h-px bg-ink mb-10"></div>
 
                 @if($poll->comments->count() > 0)
                     <div class="space-y-6 mb-10">
