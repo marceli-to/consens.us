@@ -29,15 +29,6 @@
     --color-accent: #c0392b;
 }
 
-/* Beta corner ribbon */
-.beta-ribbon {
-    @apply fixed bottom-0 left-0 md:bottom-auto md:top-0 z-100 overflow-hidden w-20 h-20 pointer-events-none;
-}
-
-.beta-ribbon::after {
-    @apply content-['Beta'] absolute left-[-22px] bottom-[18px] top-auto md:top-[18px] md:bottom-auto w-[100px] text-center font-sans font-semibold uppercase text-cream bg-accent rotate-45 md:-rotate-45 text-[9px] tracking-[0.15em] py-[3px] px-0 shadow-sm;
-}
-
 /* Vote option checkboxes */
 .vote-option input[type="checkbox"] {
     @apply sr-only;

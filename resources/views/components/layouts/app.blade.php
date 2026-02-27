@@ -17,7 +17,6 @@
     @livewireStyles
 </head>
 <body class="antialiased font-sans bg-cream text-ink min-h-screen">
-    <div class="beta-ribbon" aria-label="Beta"></div>
     <div class="min-h-screen flex flex-col">
         <x-header />
 
