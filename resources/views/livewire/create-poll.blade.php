@@ -7,24 +7,24 @@
         <form wire:submit="submit" class="space-y-10">
             {{-- Title --}}
             <div>
-                <label for="title" class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Titel</label>
+                <label for="title" class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Titel</label>
                 <input type="text" id="title" wire:model="title"
-                    class="w-full px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
+                    class="w-full px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
                     placeholder="Worum geht es?">
                 @error('title') <p class="mt-2 text-sm text-accent">{{ $message }}</p> @enderror
             </div>
 
             {{-- Description --}}
             <div>
-                <label for="description" class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Beschreibung <span class="text-ink-faint">(optional)</span></label>
+                <label for="description" class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Beschreibung <span class="text-ink-faint">(optional)</span></label>
                 <textarea id="description" wire:model="description" rows="3"
-                    class="w-full px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors resize-none"
+                    class="w-full px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors resize-none"
                     placeholder="Zusätzliche Infos..."></textarea>
             </div>
 
             {{-- Type --}}
             <div>
-                <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Typ</label>
+                <label class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Typ</label>
                 <div class="flex flex-wrap gap-2">
                     <label class="vote-option">
                         <input type="radio" wire:model.live="type" value="freetext" class="sr-only">
@@ -39,7 +39,7 @@
 
             {{-- Voting Mode --}}
             <div>
-                <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Abstimmungsmodus</label>
+                <label class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Abstimmungsmodus</label>
                 <div class="flex flex-wrap gap-2">
                     <label class="vote-option">
                         <input type="radio" wire:model.live="votingMode" value="checkbox" class="sr-only">
@@ -54,7 +54,7 @@
                         <div class="option-card {{ $votingMode === 'yesnomaybe' ? '!border-ink !bg-ink !text-cream' : '' }}">Ja · Nein · Vielleicht</div>
                     </label>
                 </div>
-                <p class="mt-2 text-[10px] text-ink-faint">
+                <p class="mt-2 text-micro text-ink-faint">
                     @if($votingMode === 'checkbox')
                         Teilnehmer können mehrere Optionen wählen.
                     @elseif($votingMode === 'radio')
@@ -67,7 +67,7 @@
 
             {{-- Options --}}
             <div>
-                <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Optionen</label>
+                <label class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Optionen</label>
                 <div class="space-y-3">
                     @foreach($options as $i => $option)
                         <div class="flex gap-2">
@@ -92,7 +92,7 @@
                                 </div>
                             @else
                                 <input type="text" wire:model="options.{{ $i }}"
-                                    class="flex-1 px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
+                                    class="flex-1 px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
                                     placeholder="Option {{ $i + 1 }}">
                             @endif
                             @if(count($options) > 2)
@@ -104,18 +104,18 @@
                     @error('options.*') <p class="text-sm text-accent">{{ $message }}</p> @enderror
                 </div>
                 <button type="button" wire:click="addOption"
-                    class="group mt-3 text-[10px] uppercase tracking-[0.2em] text-ink-faint hover:text-ink transition-colors cursor-pointer">
+                    class="group mt-3 text-micro uppercase tracking-[0.2em] text-ink-faint hover:text-ink transition-colors cursor-pointer">
                     + <span class="border-b border-transparent group-hover:border-ink pb-0.5 transition-colors">Option hinzufügen</span>
                 </button>
             </div>
 
             {{-- Password --}}
             <div>
-                <label for="password" class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Passwort <span class="text-ink-faint">(optional)</span></label>
+                <label for="password" class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Passwort <span class="text-ink-faint">(optional)</span></label>
                 <input type="text" id="password" wire:model="password"
-                    class="w-full max-w-xs px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
+                    class="w-full max-w-xs px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
                     placeholder="Zugangsschutz">
-                <p class="mt-1 text-[10px] text-ink-faint">Wenn gesetzt, müssen Teilnehmer das Passwort eingeben.</p>
+                <p class="mt-1 text-micro text-ink-faint">Wenn gesetzt, müssen Teilnehmer das Passwort eingeben.</p>
             </div>
 
             {{-- Submit --}}

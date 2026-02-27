@@ -7,7 +7,7 @@
             </h1>
             <div class="flex items-center justify-center gap-6 mb-8">
                 <span class="h-px w-16 bg-rule"></span>
-                <span class="text-[10px] tracking-[0.25em] uppercase text-ink-faint">Group decisions, simplified</span>
+                <span class="text-micro tracking-[0.25em] uppercase text-ink-faint">Group decisions, simplified</span>
                 <span class="h-px w-16 bg-rule"></span>
             </div>
             <p class="text-lg sm:text-xl text-ink-muted max-w-lg mx-auto leading-relaxed font-light">
@@ -25,7 +25,7 @@
     <section id="how" class="py-24 sm:py-32">
         <div class="max-w-2xl mx-auto px-6">
             <div class="mb-16">
-                <p class="text-[10px] tracking-[0.3em] uppercase text-ink-faint mb-3">So funktioniert's</p>
+                <p class="text-micro tracking-[0.3em] uppercase text-ink-faint mb-3">So funktioniert's</p>
                 <h2 class="font-serif text-4xl sm:text-5xl font-bold tracking-tight">Drei Schritte<br>zum Konsens.</h2>
             </div>
 
@@ -61,10 +61,10 @@
     </section>
 
     <!-- Features -->
-    <section class="py-24 sm:py-32 border-t border-rule">
+    <section class="py-24 sm:py-32">
         <div class="max-w-2xl mx-auto px-6">
             <div class="mb-16">
-                <p class="text-[10px] tracking-[0.3em] uppercase text-ink-faint mb-3">Features</p>
+                <p class="text-micro tracking-[0.3em] uppercase text-ink-faint mb-3">Features</p>
                 <h2 class="font-serif text-4xl sm:text-5xl font-bold tracking-tight">Einfach gehalten.<br>Bewusst.</h2>
             </div>
 
@@ -98,7 +98,7 @@
     </section>
 
     <!-- CTA -->
-    <section class="py-24 sm:py-32 border-t border-rule">
+    <section class="py-24 sm:py-32">
         <div class="max-w-2xl mx-auto px-6 text-center">
             <h2 class="font-serif text-4xl sm:text-5xl font-bold tracking-tight mb-6">Bereit?</h2>
             <p class="text-lg text-ink-muted mb-10 max-w-md mx-auto">Stimme jetzt ab und hilf mit, die beste Entscheidung für alle zu treffen.</p>

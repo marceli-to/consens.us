@@ -6,7 +6,7 @@
             <p class="text-sm text-ink-muted mb-8">Diese Umfrage ist passwortgeschützt.</p>
             <form wire:submit="authenticate" class="max-w-xs mx-auto space-y-4">
                 <input type="password" wire:model="password"
-                    class="w-full px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
+                    class="w-full px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
                     placeholder="Passwort">
                 @if($passwordError)
                     <p class="text-sm text-accent">{{ $passwordError }}</p>
@@ -24,7 +24,7 @@
                 <p class="text-sm text-ink-muted">{{ $poll->description }}</p>
             @endif
             @if($poll->is_closed)
-                <div class="mt-3 inline-block px-3 py-1 text-[10px] uppercase tracking-[0.2em] border border-accent text-accent">Geschlossen</div>
+                <div class="mt-3 inline-block px-3 py-1 text-micro uppercase tracking-[0.2em] border border-accent text-accent">Geschlossen</div>
             @endif
         </section>
 
@@ -33,20 +33,20 @@
             @if(!$hasVoted)
                 <section class="pb-12 border-b border-rule">
                     <div class="mb-8">
-                        <h3 class="text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted">Abstimmen</h3>
+                        <h3 class="text-micro font-medium uppercase tracking-[0.2em] text-ink-muted">Abstimmen</h3>
                     </div>
 
                     <form wire:submit="submitVote" class="space-y-8">
                         <div>
-                            <label for="voterName" class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Name</label>
+                            <label for="voterName" class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Name</label>
                             <input type="text" id="voterName" wire:model="voterName"
-                                class="w-full max-w-xs px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
+                                class="w-full max-w-xs px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
                                 placeholder="Dein Name">
                             @error('voterName') <p class="mt-2 text-sm text-accent">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
-                            <label class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Optionen
+                            <label class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-3">Optionen
                                 @if($poll->isSingleChoice())
                                     <span class="text-ink-faint">(Einzelauswahl)</span>
                                 @elseif($poll->isYesNoMaybe())
@@ -126,7 +126,7 @@
                             <p class="text-sm text-ink-muted mt-1">Deine Stimme wurde gespeichert.</p>
                         </div>
                         <button wire:click="editVote"
-                            class="text-[10px] uppercase tracking-[0.2em] text-ink-faint hover:text-ink border-b border-ink-faint hover:border-ink pb-0.5 transition-colors cursor-pointer">
+                            class="text-micro uppercase tracking-[0.2em] text-ink-faint hover:text-ink border-b border-ink-faint hover:border-ink pb-0.5 transition-colors cursor-pointer">
                             Bearbeiten
                         </button>
                     </div>
@@ -138,7 +138,7 @@
         <section class="pt-12">
             <div class="flex items-baseline justify-between pb-4 mb-10 border-b border-ink">
                 <h2 class="font-serif text-3xl font-bold tracking-tight">Ergebnisse</h2>
-                <span class="text-[10px] tracking-[0.2em] uppercase text-ink-faint tabular-nums">
+                <span class="text-micro tracking-[0.2em] uppercase text-ink-faint tabular-nums">
                     {{ $results['totalVoters'] }} {{ $results['totalVoters'] === 1 ? 'Stimme' : 'Stimmen' }}
                 </span>
             </div>
@@ -218,7 +218,7 @@
             <section class="pt-12">
                 <div class="flex items-baseline justify-between pb-4 mb-10 border-b border-ink">
                     <h2 class="font-serif text-3xl font-bold tracking-tight">Kommentare</h2>
-                    <span class="text-[10px] tracking-[0.2em] uppercase text-ink-faint tabular-nums">
+                    <span class="text-micro tracking-[0.2em] uppercase text-ink-faint tabular-nums">
                         {{ $poll->comments->count() }}
                     </span>
                 </div>
@@ -229,7 +229,7 @@
                             <div class="border-l-2 border-rule pl-4 py-1">
                                 <div class="flex items-baseline gap-3">
                                     <span class="text-sm font-medium text-ink">{{ $comment->author_name }}</span>
-                                    <span class="text-[10px] text-ink-faint">{{ $comment->created_at->diffForHumans() }}</span>
+                                    <span class="text-micro text-ink-faint">{{ $comment->created_at->diffForHumans() }}</span>
                                 </div>
                                 <p class="text-sm text-ink-muted mt-1">{{ $comment->body }}</p>
                             </div>
@@ -242,16 +242,16 @@
                 @if(!$poll->is_closed)
                     <form wire:submit="submitComment" class="space-y-4">
                         <div>
-                            <label for="commentAuthor" class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Name</label>
+                            <label for="commentAuthor" class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Name</label>
                             <input type="text" id="commentAuthor" wire:model="commentAuthor"
-                                class="w-full max-w-xs px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
+                                class="w-full max-w-xs px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors"
                                 placeholder="Dein Name">
                             @error('commentAuthor') <p class="mt-2 text-sm text-accent">{{ $message }}</p> @enderror
                         </div>
                         <div>
-                            <label for="commentBody" class="block text-[10px] font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Kommentar</label>
+                            <label for="commentBody" class="block text-micro font-medium uppercase tracking-[0.2em] text-ink-muted mb-2">Kommentar</label>
                             <textarea id="commentBody" wire:model="commentBody" rows="3"
-                                class="w-full px-4 py-3 text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors resize-none"
+                                class="w-full px-4 py-3 text-base sm:text-sm border border-rule bg-cream text-ink placeholder-ink-faint focus:outline-none focus:border-ink transition-colors resize-none"
                                 placeholder="Dein Kommentar..."></textarea>
                             @error('commentBody') <p class="mt-2 text-sm text-accent">{{ $message }}</p> @enderror
                         </div>
